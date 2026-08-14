@@ -1,0 +1,36 @@
+name: CD
+
+on:
+  push:
+    branches: [ main, master ]
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+
+      - name: Build project
+        run: make
+
+      - name: Create release archive
+        run: |
+          mkdir -p release
+          cp build/elevator_app release/
+          tar -czf elevator-release.tar.gz -C release .
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: elevator-release.tar.gz
