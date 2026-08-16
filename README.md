@@ -28,6 +28,12 @@ make
 ./build/elevator_app
 ```
 
+## Run unit tests
+
+```bash
+make test
+```
+
 ## How to port to real hardware
 
 1. Replace the HAL layer in `src/hal.c` with the MCU-specific driver calls.
