@@ -33,6 +33,26 @@ void hal_stop_door(void)
     printf("Door stopped\n");
 }
 
+void hal_set_current_floor(uint8_t floor)
+{
+    g_hw.current_floor = floor;
+}
+
+void hal_set_emergency_stop(bool active)
+{
+    g_hw.emergency_stop = active;
+}
+
+void hal_set_door_obstructed(bool active)
+{
+    g_hw.door_obstructed = active;
+}
+
+void hal_set_over_weight(bool active)
+{
+    g_hw.over_weight = active;
+}
+
 uint8_t hal_get_current_floor(void)
 {
     return g_hw.current_floor;
